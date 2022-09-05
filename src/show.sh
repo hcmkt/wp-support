@@ -5,7 +5,7 @@ date_today=$(date "+%Y/%m/%d")
 core=$(cat "$DIR/core.txt")
 core_update=$(cat "$DIR/core-update.txt")
 if [ "$core_update" != "" ] && [ "$core" != "$core_update" ]; then
-    printf '"%s", "WordPress本体", "%s", "%s", "なし"\n' "$date_today" "$core" "$core_update"
+    printf '"高", "%s", "WordPress本体", "%s", "%s", "有"\n' "$date_today" "$core" "$core_update"
 fi
 pts=("plugin" "theme")
 for pt in "${pts[@]}"; do
@@ -18,7 +18,7 @@ for pt in "${pts[@]}"; do
         version="$(echo "$row" | jq -r .version)"
         update_version="$(echo "$row" | jq -r .update_version)"
         if [ "$update" != "none" ] && [ "$version" != "$update_version" ]; then
-            printf '"%s", "%s", "%s", "%s", "なし"\n' "$date_today" "$title" "$version" "$update_version"
+            printf '"低", "%s", "%s", "%s", "%s", "なし"\n' "$date_today" "$title" "$version" "$update_version"
         fi
     done
 done
