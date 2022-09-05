@@ -1,0 +1,30 @@
+version: '3'
+
+dotenv: [.env]
+
+tasks:
+  init:
+    cmds:
+      - cp .env.example .env
+
+  avant:
+    cmds:
+      - mkdir $DIR
+      - src/backup.sh
+      - src/list.sh $ENV
+      - src/show.sh
+      - ssh $HOST "$WP config set WP_DEBUG true --raw --path=$WP_DIR"
+      - ssh $HOST "$WP eval 'error_log(123456789);' --path=$WP_DIR"
+
+  update:
+    cmds:
+      - src/update.sh
+
+  apres:
+    cmds:
+      - scp $DIR/wp-config.php $HOST:$WP_DIR/
+      - scp $HOST:$WP_LOG_FILE $DIR/
+
+  rmlog:
+    cmds:
+      - ssh $HOST "rm $WP_LOG_FILE"
