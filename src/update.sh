@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 
 function wp() {
     echo "[$(date -u '+%Y-%m-%d %H:%M:%S %Z')] $WP $1" >>"$DIR/update.log" 2>&1

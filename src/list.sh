@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 case "$1" in
 "stg")
     ssh "$HOST" "cd $WP_DIR; $WP core version" >"$DIR/core.txt"

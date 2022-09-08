@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 date_today=$(date "+%Y/%m/%d")
 core=$(cat "$DIR/core.txt")
 core_update=$(cat "$DIR/core-update.txt")
