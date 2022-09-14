@@ -4,7 +4,7 @@ source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 case "$1" in
 "stg")
     sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core version" >"$DIR/core.txt"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core check-update --format=json | jq -r '[.[] | .version] | max'" >"$DIR/core-update.txt"
+    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core check-update --format=json" | jq -r '[.[] | .version] | max' >"$DIR/core-update.txt"
     sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP plugin list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/plugin.json"
     sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP theme list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/theme.json"
     ;;
