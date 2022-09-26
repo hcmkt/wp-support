@@ -12,9 +12,12 @@ tasks:
       - mkdir $DIR
       - src/backup.sh
       - src/list.sh $ENV
-      - src/show.sh
       - sshpass -p $PASS ssh $HOST "$WP config set WP_DEBUG true --raw --path=$WP_DIR"
       - sshpass -p $PASS ssh $HOST "$WP eval 'error_log(123456789);' --path=$WP_DIR"
+
+  show:
+    cmds:
+      - src/show.sh
 
   update:
     cmds:
