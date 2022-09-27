@@ -22,3 +22,7 @@ for pt in "${pts[@]}"; do
         fi
     done
 done
+language=$(cat "$DIR/language-update.txt")
+if "$language"; then
+    printf '"低", "%s", "翻訳", "-", "-", "なし"\n' "$date_today"
+fi

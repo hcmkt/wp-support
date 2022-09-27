@@ -51,3 +51,15 @@ case "$1" in
     done
     ;;
 esac
+echo "false" >"$DIR/language-update.txt"
+cpts=("core" "plugin" "theme")
+for cpt in "${cpts[@]}"; do
+    if [ "$cpt" = "core" ]; then
+        log=$(sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP language $cpt update --dry-run")
+    else
+        log=$(sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP language $cpt update --all --dry-run")
+    fi
+    if ! echo "$log" | grep -q "Success: Translations are up to date."; then
+        echo "true" >"$DIR/language-update.txt"
+    fi
+done
