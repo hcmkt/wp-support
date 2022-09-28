@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck source=/dev/null
 source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 
 function wp() {

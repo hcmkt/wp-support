@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck source=/dev/null
 source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 date_today=$(date "+%Y/%m/%d")
 core=$(cat "$DIR/core.txt")
