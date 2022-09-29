@@ -5,7 +5,7 @@ dotenv: [.env]
 tasks:
   init:
     cmds:
-      - cp .env.example .env
+      - src/initialize.sh {{.CLI_ARGS}}
 
   avant:
     cmds:
@@ -31,3 +31,8 @@ tasks:
   rmlog:
     cmds:
       - sshpass -p $PASS ssh $HOST "rm $WP_LOG_FILE"
+
+  add:
+    cmds:
+      - touch env.json
+      - jq -s add env.json env.json.example > tmpfile && mv tmpfile env.json

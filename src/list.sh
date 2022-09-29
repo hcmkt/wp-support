@@ -4,15 +4,15 @@
 source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 case "$1" in
 "stg")
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core version" >"$DIR/core.txt"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core check-update --format=json" | jq -r '[.[] | .version] | max' >"$DIR/core-update.txt"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP plugin list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/plugin.json"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP theme list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/theme.json"
+    sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG core version" >"$DIR/core.txt"
+    sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG core check-update --format=json" | jq -r '[.[] | .version] | max' >"$DIR/core-update.txt"
+    sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG plugin list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/plugin.json"
+    sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG theme list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/theme.json"
     ;;
 "prod")
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP core version" >"$DIR/core.txt"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP plugin list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/plugin-prod.json"
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP theme list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/theme-prod.json"
+    sshpass -p "$PASS_PROD" ssh "$HOST_PROD" "cd $WP_DIR_PROD; $WP_PROD core version" >"$DIR/core.txt"
+    sshpass -p "$PASS_PROD" ssh "$HOST_PROD" "cd $WP_DIR_PROD; $WP_PROD plugin list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/plugin-prod.json"
+    sshpass -p "$PASS_PROD" ssh "$HOST_PROD" "cd $WP_DIR_PROD; $WP_PROD theme list --fields=name,title,status,update,version,update_version --format=json" | jq >"$DIR/theme-prod.json"
     sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG core version" >"$DIR/core-update.txt"
     sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG plugin list --format=json" | jq >"$DIR/plugin-stg.json"
     sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG theme list --format=json" | jq >"$DIR/theme-stg.json"
