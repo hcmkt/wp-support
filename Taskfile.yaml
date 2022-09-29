@@ -7,7 +7,7 @@ tasks:
     cmds:
       - src/initialize.sh {{.CLI_ARGS}}
 
-  avant:
+  prepare:
     cmds:
       - mkdir $DIR
       - src/backup.sh
@@ -23,7 +23,7 @@ tasks:
     cmds:
       - src/update.sh
 
-  apres:
+  clean:
     cmds:
       - sshpass -p $PASS scp $DIR/wp-config.php $HOST:$WP_DIR/
       - sshpass -p $PASS scp $HOST:$WP_LOG_FILE $DIR/
