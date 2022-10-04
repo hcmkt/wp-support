@@ -36,3 +36,7 @@ tasks:
     cmds:
       - touch env.json
       - jq -s add env.json env.json.example > tmpfile && mv tmpfile env.json
+  
+  ssh:
+    cmds:
+      - sshpass -p $PASS ssh $HOST
