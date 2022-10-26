@@ -6,7 +6,19 @@ date_today=$(date "+%Y/%m/%d")
 core=$(cat "$DIR/core.txt")
 core_update=$(cat "$DIR/core-update.txt")
 if [ "$core_update" != "" ] && [ "$core" != "$core_update" ]; then
-    printf '"高", "%s", "WordPress本体", "%s", "%s", "有"\n' "$date_today" "$core" "$core_update"
+    IFS="." read -r -a core_versions <<< "$core"
+    IFS="." read -r -a core_update_versions <<< "$core_update"
+    arr=(0 1)
+    importance="低"
+    note="なし"
+    for v in "${arr[@]}"; do
+        if [ "${core_versions[$v]}" \< "${core_update_versions[$v]}" ]; then
+            importance="高"
+            note="有"
+            break
+        fi
+    done
+    printf '"%s", "%s", "WordPress本体", "%s", "%s", "%s"\n' "$importance" "$date_today" "$core" "$core_update" "$note"
 fi
 pts=("plugin" "theme")
 for pt in "${pts[@]}"; do
