@@ -34,9 +34,9 @@ tasks:
 
   add:
     cmds:
-      - touch env.json
-      - jq -s add env.json env.json.example > tmpfile && mv tmpfile env.json
-  
+      - touch env.yaml
+      - yq '. += load("env.yaml.example")' env.yaml > tmpfile && mv tmpfile env.yaml
+
   ssh:
     cmds:
       - sshpass -p $PASS ssh $HOST
