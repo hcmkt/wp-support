@@ -39,4 +39,4 @@ tasks:
 
   ssh:
     cmds:
-      - sshpass -p $PASS ssh $HOST
+      - sshpass -p $PASS ssh $HOST {{.CLI_ARGS}}
