@@ -4,8 +4,8 @@
 source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
 
 function wp() {
-    echo "[$(date -u '+%Y-%m-%d %H:%M:%S %Z')] $WP $1" >>"$DIR/update.log" 2>&1
-    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP $1" >>"$DIR/update.log" 2>&1
+    echo "[$(date -u '+%Y-%m-%d %H:%M:%S %Z')] $WP $1" 2>&1 | tee -a "$DIR/update.log"
+    sshpass -p "$PASS" ssh "$HOST" "cd $WP_DIR; $WP $1" 2>&1 | tee -a "$DIR/update.log"
 }
 
 : >"$DIR/update.log"
