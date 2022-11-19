@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # shellcheck source=/dev/null
-source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
+source "$(
+    cd "$(dirname "$0")"/.. || exit
+    pwd
+)/.env"
 case "$1" in
 "stg")
     sshpass -p "$PASS_STG" ssh "$HOST_STG" "cd $WP_DIR_STG; $WP_STG core version" >"$DIR/core.txt"

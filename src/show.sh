@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # shellcheck source=/dev/null
-source "$(cd "$(dirname "$0")"/.. || exit; pwd)/.env"
+source "$(
+    cd "$(dirname "$0")"/.. || exit
+    pwd
+)/.env"
 date_today=$(date "+%Y/%m/%d")
 core=$(cat "$DIR/core.txt")
 core_update=$(cat "$DIR/core-update.txt")
 if [ "$core_update" != "" ] && [ "$core" != "$core_update" ]; then
-    IFS="." read -r -a core_versions <<< "$core"
-    IFS="." read -r -a core_update_versions <<< "$core_update"
+    IFS="." read -r -a core_versions <<<"$core"
+    IFS="." read -r -a core_update_versions <<<"$core_update"
     arr=(0 1)
     importance="低"
     note="なし"
