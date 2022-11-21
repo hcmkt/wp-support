@@ -35,7 +35,7 @@ tasks:
   add:
     cmds:
       - touch env.yaml
-      - yq '. += load("env.yaml")' env.yaml.example > tmpfile && mv tmpfile env.yaml
+      - yq '. += load("env.yaml.example")' env.yaml > tmpfile && mv tmpfile env.yaml
 
   ssh:
     cmds:
