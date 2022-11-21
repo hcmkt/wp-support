@@ -21,7 +21,7 @@ if [ "$core_update" != "" ] && [ "$core" != "$core_update" ]; then
             break
         fi
     done
-    printf '%s, %s, WordPress本体, %s, %s, %s\n' "$importance" "$date_today" "$core" "$core_update" "$note"
+    printf '"%s", "%s", "WordPress本体", "%s", "%s", "%s"\n' "$importance" "$date_today" "$core" "$core_update" "$note"
 fi
 pts=("plugin" "theme")
 for pt in "${pts[@]}"; do
@@ -34,11 +34,11 @@ for pt in "${pts[@]}"; do
         version="$(echo "$row" | jq -r .version)"
         update_version="$(echo "$row" | jq -r .update_version)"
         if [ "$update" != "none" ] && [ "$version" != "$update_version" ]; then
-            printf '低, %s, %s, %s, %s, なし\n' "$date_today" "$title" "$version" "$update_version"
+            printf '"低", "%s", "%s", "%s", "%s", "なし"\n' "$date_today" "$title" "$version" "$update_version"
         fi
     done
 done
 language=$(cat "$DIR/language-update.txt")
 if "$language"; then
-    printf '低, %s, 翻訳, -, -, なし\n' "$date_today"
+    printf '"低", "%s", "翻訳", "-", "-", "なし"\n' "$date_today"
 fi
