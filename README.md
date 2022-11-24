@@ -7,9 +7,26 @@ Update tool for WordPress sites
 - [yq](https://github.com/mikefarah/yq)
 
 ## Usage
-1. If the destination information is not included in the `env.json` file, run the following command and then put the necessary information in the `.env.json` file.
+1. If the connection information is not included in the `env.json` file, run the following command and then write the necessary information in the `.env.json` file.
     ```sh
     task add
+    ```
+
+    The necessary information are as follows.
+    ```yaml
+    - name:             # unique name
+      stg:
+        host:           # Host written in ~/.ssh/config
+        pass: xxxxx     # password for Host (if not password authentication, set any string)
+        wp_dir:         # WordPress document root
+        wp_cmd:         # wp command
+        wp_log:         # log file path
+      prod:
+        host:           # Host written in ~/.ssh/config
+        pass: xxxxx     # password for Host (if not password authentication, set any string)
+        wp_dir:         # WordPress document root
+        wp_cmd:         # wp command
+        wp_log:         # log file path
     ```
 
 1. To set the required information in `.env`, execute the following command.
