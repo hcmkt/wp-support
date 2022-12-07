@@ -40,3 +40,8 @@ tasks:
   ssh:
     cmds:
       - sshpass -p $PASS ssh $HOST {{.CLI_ARGS}}
+
+  backup:
+    - mkdir $DIR
+    - src/backup.sh
+    - src/list.sh $ENV
