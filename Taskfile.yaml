@@ -45,3 +45,6 @@ tasks:
     - mkdir $DIR
     - src/backup.sh
     - src/list.sh $ENV
+
+  send:
+    - scp -r $DIR $HOST:$WP_DIR
