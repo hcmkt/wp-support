@@ -4,7 +4,6 @@ Update tool for WordPress sites
 ## Requirements
 - [Task](https://github.com/go-task/task)
 - [jq](https://github.com/stedolan/jq)
-- [yq](https://github.com/mikefarah/yq)
 
 ## Usage
 1. If the connection information is not included in the `env.json` file, run the following command and then write the necessary information in the `.env.json` file.

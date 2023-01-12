@@ -4,9 +4,9 @@ root_dir="$(
     cd "$(dirname "$0")"/.. || exit
     pwd
 )"
-json_yaml="$root_dir/env.yaml"
+json_file="$root_dir/env.json"
 env_file="$root_dir/.env"
-connection="$(yq <"$json_yaml" -o=json '.' | jq "map(select(.name == \"$1\"))")"
+connection="$(jq <"$json_file" "map(select(.name == \"$1\"))")"
 {
     echo "DIR=$root_dir/data/$(date '+%Y-%m-%d')_$1_$2"
     echo "ENV=$2"
